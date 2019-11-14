@@ -6,10 +6,14 @@ import com.mingj.team.api.command.TeamCommand;
 import com.mingj.team.client.GuiHandler;
 import com.mingj.team.client.Keybind;
 import com.mingj.team.commands.CommandTeam;
+import com.mingj.team.commands.CreateCommand;
 import com.mingj.team.commands.HelpCommand;
 import com.mingj.team.commands.InviteCommand;
+import com.mingj.team.commands.LeaveCommand;
 import com.mingj.team.handlers.ClientEventHandler;
 import com.mingj.team.network.*;
+import com.mingj.team.team.TeamList;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,10 +38,11 @@ public class TeamMod
     public static final String MODID = "teammod";
     public static final String NAME = "Teams Mod";
     public static final String VERSION = "1.1";
-
+    
     @Instance(MODID)
     public static TeamMod instance;
-
+    
+    public static TeamList teams;
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         PacketHandler.INSTANCE.registerMessage(MessageSaveData.MessageHandler.class,MessageSaveData.class,0, Side.SERVER);
@@ -68,18 +73,24 @@ public class TeamMod
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
     	TeamCommand command = new TeamCommand(Arrays.asList(
+    			new HelpCommand(),
+    			new CreateCommand(),
     			new InviteCommand(),
-    			new HelpCommand()
+    			new LeaveCommand()
     			));
         event.registerServerCommand( command );
         
         if(FMLCommonHandler.instance().getMinecraftServerInstance().isSinglePlayer()) {
             PacketHandler.INSTANCE.sendToAll(new MessageClear());
         }
+        teams = TeamList.load();
     }
 
     @EventHandler
     public void serverStop(FMLServerStoppingEvent event) {
         PacketHandler.INSTANCE.sendToAll(new MessageClear());
+    }
+    public static TeamList getTeams(){
+    	return teams;
     }
 }

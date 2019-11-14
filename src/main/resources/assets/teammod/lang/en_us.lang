@@ -1,3 +1,26 @@
 # commands
 cmd.invite.info=Invite Player join your team!
+cmd.usage=Usage
 cmd.error=Use '/team help' for more information!
+# commands info
+cmd.create.info=Create Team by name
+cmd.leave.info=Leave team if you have
+cmd.help.info=list all command and it's usage
+cmd.invite.info=Send team invite to player
+cmd.kick.info=
+cmd.list.info=
+cmd.accept.info=
+
+# command error message
+cmd.create.error.alreadyexists=That team already exists
+cmd.create.error.haveteam=You're already in a team! Leave it first!
+cmd.create.error.toolong=That team name is too long!
+
+
+
+cmd.leave.error.noargs=too many arguements! 
+cmd.leave.error.noteam=You don't have team!
+
+# command success message
+cmd.create.success.create=You created team :
+cmd.leave.success.leave=Success leave team

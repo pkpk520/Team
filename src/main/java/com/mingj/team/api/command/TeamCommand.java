@@ -36,7 +36,7 @@ public class TeamCommand extends CommandBase{
             for (SubCommand cmd : this.subCommands) {
                 if (cmd.getCommandName().equalsIgnoreCase(args[0]) ){
                     if (!cmd.execute(server, sender, args)) {
-                        sender.sendMessage(new TextComponentString(TextFormatting.RED + "Usage: /team " + cmd.getCommandName() + ' ' + cmd.getUsage() + " - " + cmd.getInfo()));
+                        sender.sendMessage(new TextComponentString(TextFormatting.RED + I18n.translateToLocal("cmd.usage")+": /team " + cmd.getCommandName() + ' ' + cmd.getUsage() + " - " + cmd.getInfo()));
                         sender.sendMessage(new TextComponentString(TextFormatting.RED + I18n.translateToLocal("cmd.error")));
                     }
                     return;
@@ -60,11 +60,11 @@ public class TeamCommand extends CommandBase{
 	
 	@Override
 	public String getUsage(@Nonnull ICommandSender arg0) {
-		StringBuilder builder = new StringBuilder("Usage: /team <");
+		StringBuilder builder = new StringBuilder("Usage:\n");
         for (SubCommand cmd : this.subCommands) {
-            builder.append(cmd.getCommandName()).append('|');
+            builder.append("/team " + cmd.getCommandName()+ " " +cmd.getUsage() + " - " + cmd.getInfo() + "\n");
         }
-        return builder.deleteCharAt(builder.length() - 1).append('>').toString();
+        return builder.toString();
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ public class TeamCommand extends CommandBase{
     @Override
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
         if (args.length == 1)
-            return this.subCommands.stream().map(SubCommand::getCommandName).collect(Collectors.toList());
+            return this.subCommands.stream().map( cmd -> cmd.getCommandName()).filter( name -> name.startsWith(args[0])).collect(Collectors.toList());
         if (args.length > 1) {
             if (args[0].equalsIgnoreCase("invite") ) {
                 return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers().stream().map(EntityPlayer::getName).collect(Collectors.toList());

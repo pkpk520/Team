@@ -5,10 +5,10 @@ import com.mingj.team.api.command.SubCommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 
-public class KickCommand extends SubCommand{
-	public static final String NAME = "kick";
-	public KickCommand() {
-		super( NAME );
+public class InfoCommand extends SubCommand{
+	public static final String NAME = "info";
+	public InfoCommand() {
+		super(NAME);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -21,7 +21,5 @@ public class KickCommand extends SubCommand{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 }

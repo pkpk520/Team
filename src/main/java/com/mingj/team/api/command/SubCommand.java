@@ -1,7 +1,10 @@
 package com.mingj.team.api.command;
 
+
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.translation.I18n;
 
 public abstract class SubCommand {
 	private final String commandName;
@@ -15,5 +18,7 @@ public abstract class SubCommand {
 	public String getCommandName(){
 		return this.commandName;
 	}
-	public abstract String getInfo();
+	public String getInfo(){
+		return I18n.translateToLocal( "cmd." + this.commandName + ".info" );
+	};
 }

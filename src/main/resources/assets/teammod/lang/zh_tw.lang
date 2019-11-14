@@ -1,3 +1,25 @@
 # commands
-cmd.invite.info=發送組隊邀請!
+cmd.usage=用法
 cmd.error=使用 /team help 查看更多資訊
+# commands info
+cmd.create.info=建立組隊
+cmd.leave.info=離開隊伍
+cmd.help.info=列出Team模組所有指令及說明
+cmd.invite.info=發送組隊邀請!
+cmd.kick.info=
+cmd.list.info=
+cmd.accept.info=
+
+# command error message
+cmd.create.error.alreadyexists=隊伍名稱已被使用!
+cmd.create.error.haveteam=你已經有組隊了!
+cmd.create.error.toolong=隊伍名稱過長!
+
+
+
+cmd.leave.error.noargs=參數過多! 
+cmd.leave.error.noteam=你沒有組隊!
+
+# command success message
+cmd.create.success.create=你創立了隊伍 :
+cmd.leave.success.leave=成功退出組隊

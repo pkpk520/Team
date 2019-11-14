@@ -10,7 +10,7 @@ import net.minecraft.util.text.translation.I18n;
 public class InviteCommand extends SubCommand{
 	private static final String NAME = "invite";
 	public InviteCommand() {
-		super( "invite" );
+		super( InviteCommand.NAME );
 	
 	}
 
@@ -25,9 +25,6 @@ public class InviteCommand extends SubCommand{
 		return "<player_name>";
 	}
 
-	@Override
-	public String getInfo() {
-		return I18n.translateToLocal( "cmd." + InviteCommand.NAME + ".info" );
-	}
+
 
 }

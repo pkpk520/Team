@@ -11,7 +11,7 @@ import net.minecraft.util.text.TextFormatting;
 public class HelpCommand extends SubCommand{
 	private static final String NAME= "help";
 	public HelpCommand() {
-        super( "help" );
+        super( HelpCommand.NAME );
     }
 
     @Override

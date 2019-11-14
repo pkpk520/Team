@@ -1,7 +1,9 @@
 package com.mingj.team.handlers;
 
+import com.mingj.team.TeamMod;
 import com.mingj.team.client.Keybind;
 import com.mingj.team.team.SaveData;
+import com.mingj.team.team.Team;
 import com.mojang.realmsclient.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -41,8 +43,11 @@ public class ClientEventHandler {
     public void onChatMessage(ClientChatReceivedEvent event) {
     	
         String text = event.getMessage().getUnformattedText();
-        int slice = text.indexOf(">") + 1;
-    
+        if( !text.contains(">")){
+        	return;
+        }
+    	int slice = text.indexOf(">") + 1;
+        
         if(slice>0) {
             
         	String playerName = text.substring(1,slice-1);
@@ -55,9 +60,10 @@ public class ClientEventHandler {
                 chatMap.put(playerName,temp);
             }
             if(!ConfigHandler.client.disablePrefix) {
-                UUID uid = ply.getUniqueID();
-                if(SaveData.teamMap.containsKey(uid)) {
-                    String message = "[" + SaveData.teamMap.get(uid) + "]" + " <" + playerName + "> "  + text.substring(slice+1);
+                UUID uuid = ply.getUniqueID();
+                Team team = TeamMod.getTeams().getTeamByUUID(uuid);
+                if( team != null) {
+                    String message = "[" + team.getName() + "]" + " <" + playerName + "> "  + text.substring(slice+1);
                     event.setMessage(new TextComponentString(message));
                 }
             }
