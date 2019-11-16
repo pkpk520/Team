@@ -41,7 +41,7 @@ public class ClientEventHandler {
     }
     @SubscribeEvent
     public void onChatMessage(ClientChatReceivedEvent event) {
-    	
+    	System.out.print( "\n trigger client chat");
         String text = event.getMessage().getUnformattedText();
         if( !text.contains(">")){
         	return;

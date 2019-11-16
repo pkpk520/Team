@@ -5,21 +5,69 @@ cmd.error=使用 /team help 查看更多資訊
 cmd.create.info=建立組隊
 cmd.leave.info=離開隊伍
 cmd.help.info=列出Team模組所有指令及說明
-cmd.invite.info=發送組隊邀請!
-cmd.kick.info=
-cmd.list.info=
-cmd.accept.info=
+cmd.invite.info=發送組隊邀請
+cmd.kick.info=踢除隊員
+cmd.list.info=顯示隊員列表
+cmd.accept.info=接受組隊邀請
+cmd.info.info=顯示隊伍資訊
 
 # command error message
 cmd.create.error.alreadyexists=隊伍名稱已被使用!
 cmd.create.error.haveteam=你已經有組隊了!
 cmd.create.error.toolong=隊伍名稱過長!
 
+cmd.invite.error.sameplayer=你不能對自己發送邀請!
+cmd.invite.error.offline=不在線!
+cmd.invite.error.noteam=你必須先建立組隊!
+cmd.invite.error.alreadyinvite=你已經發送過邀請給
+cmd.invite.error.haveteam=玩家已擁有組隊!
+cmd.invite.error.limit=組隊已達上限!
 
+cmd.leave.error.noargs=參數過多!
+cmd.leave.error.noteam=你沒有任何隊伍!
+
+
+cmd.accept.error.sameplayer=無法指定自己!
+cmd.accept.error.haveteam=你已經擁有組隊!
+cmd.accept.error.offline=不在線!
+cmd.accept.error.noteam=無效的邀請!
+cmd.accept.error.noinvite=該玩家並未邀請你!
+
+cmd.reject.error.sameplayer=無法拒絕自己!
+cmd.reject.error.noteam=該隊伍已解散!
+cmd.reject.error.noinvite=無效的邀請!
 
 cmd.leave.error.noargs=參數過多! 
 cmd.leave.error.noteam=你沒有組隊!
 
+cmd.kick.error.offline=不在線!
+cmd.kick.error.sameplayer=你不能踢出自己!
+cmd.kick.error.noteam=你必須先建立組隊!
+cmd.kick.error.notowner=你沒有權限踢除隊員!
+cmd.kick.error.notmember=該玩家不在組隊內!
+
+cmd.list.error.noteam=你必須先擁有組隊!
+
+cmd.info.error.noteam=你必須先擁有組隊!
 # command success message
 cmd.create.success.create=你創立了隊伍 :
 cmd.leave.success.leave=成功退出組隊
+cmd.leave.success.ownerleave=隊長離開組隊，組隊已解散!
+cmd.leave.success.alreadyleave=已退出組隊!
+cmd.invite.success.invite=成功發送組隊邀請給玩家
+cmd.accept.success.accept=加入組隊
+cmd.accept.success.intoteam=你加入了隊伍
+cmd.kick.success.forteam=隊長已踢除玩家
+cmd.kick.success.forplayer=你被踢出組隊!
+cmd.reject.success.forsender=拒絕你的邀請!
+cmd.reject.success.forplayer=你拒絕了組隊邀請!
+
+
+# command normal message
+cmd.invite.receive=收到組隊邀請，來自玩家
+cmd.msg.teamname=隊名
+cmd.msg.captain=隊長
+cmd.msg.membercount=人數
+cmd.msg.member=成員
+cmd.msg.accept=接受
+cmd.msg.reject=拒絕

@@ -5,15 +5,22 @@ import java.util.Arrays;
 import com.mingj.team.api.command.TeamCommand;
 import com.mingj.team.client.GuiHandler;
 import com.mingj.team.client.Keybind;
+import com.mingj.team.commands.AcceptCommand;
 import com.mingj.team.commands.CommandTeam;
 import com.mingj.team.commands.CreateCommand;
 import com.mingj.team.commands.HelpCommand;
+import com.mingj.team.commands.InfoCommand;
 import com.mingj.team.commands.InviteCommand;
+import com.mingj.team.commands.KickCommand;
 import com.mingj.team.commands.LeaveCommand;
+import com.mingj.team.commands.ListCommand;
+import com.mingj.team.commands.RejectCommand;
 import com.mingj.team.handlers.ClientEventHandler;
+import com.mingj.team.handlers.ServerChatHandler;
 import com.mingj.team.network.*;
 import com.mingj.team.team.TeamList;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,7 +48,7 @@ public class TeamMod
     
     @Instance(MODID)
     public static TeamMod instance;
-    
+    public static MinecraftServer server;
     public static TeamList teams;
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -50,10 +57,13 @@ public class TeamMod
         PacketHandler.INSTANCE.registerMessage(MessageClear.MessageHandler.class,MessageClear.class,5,Side.SERVER);
         PacketHandler.INSTANCE.registerMessage(MessageDeath.MessageHandler.class,MessageDeath.class,3,Side.SERVER);
         PacketHandler.INSTANCE.registerMessage(MessageGui.MessageHandler.class, MessageGui.class,4,Side.SERVER);
+    	
+    	
         if(FMLCommonHandler.instance().getSide()==Side.CLIENT) {
+        	
             Keybind.register();
             MinecraftForge.EVENT_BUS.register(GuiHandler.instance());
-            MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+      //      MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
             PacketHandler.INSTANCE.registerMessage(MessageSaveData.MessageHandler.class,MessageSaveData.class,0,Side.CLIENT);
             PacketHandler.INSTANCE.registerMessage(MessageHunger.MessageHandler.class, MessageHunger.class,1,Side.CLIENT);
             PacketHandler.INSTANCE.registerMessage(MessageClear.MessageHandler.class,MessageClear.class,5,Side.CLIENT);
@@ -69,14 +79,25 @@ public class TeamMod
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     }
-
+    
+    @EventHandler
+    public void serverStart( FMLServerStartingEvent event){
+    	MinecraftForge.EVENT_BUS.register(new ServerChatHandler());
+    }
+    
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
+    	server = event.getServer();
     	TeamCommand command = new TeamCommand(Arrays.asList(
     			new HelpCommand(),
     			new CreateCommand(),
+    			new InfoCommand(),
     			new InviteCommand(),
-    			new LeaveCommand()
+    			new AcceptCommand(),
+    			new RejectCommand(),
+    			new LeaveCommand(),
+    			new ListCommand(),
+    			new KickCommand()
     			));
         event.registerServerCommand( command );
         
@@ -93,4 +114,5 @@ public class TeamMod
     public static TeamList getTeams(){
     	return teams;
     }
+   
 }

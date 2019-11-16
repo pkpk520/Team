@@ -37,8 +37,4 @@ public class HelpCommand extends SubCommand{
         return "";
     }
 
-    @Override
-    public String getInfo() {
-        return "";
-    }
 }

@@ -78,9 +78,17 @@ public class TeamCommand extends CommandBase{
         if (args.length == 1)
             return this.subCommands.stream().map( cmd -> cmd.getCommandName()).filter( name -> name.startsWith(args[0])).collect(Collectors.toList());
         if (args.length > 1) {
-            if (args[0].equalsIgnoreCase("invite") ) {
-                return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers().stream().map(EntityPlayer::getName).collect(Collectors.toList());
+            if (args[0].equalsIgnoreCase("create") ) {
+            	return Collections.emptyList();
             }
+            if( args[0].equalsIgnoreCase("leave") ){
+            	return Collections.emptyList();
+            }
+            if( args[0].equalsIgnoreCase("help") ){
+            	return Collections.emptyList();
+            }
+            return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers().stream().map(EntityPlayer::getName).collect(Collectors.toList());
+            
         }
         return Collections.emptyList();
     }

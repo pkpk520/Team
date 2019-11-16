@@ -7,20 +7,66 @@ cmd.create.info=Create Team by name
 cmd.leave.info=Leave team if you have
 cmd.help.info=list all command and it's usage
 cmd.invite.info=Send team invite to player
-cmd.kick.info=
-cmd.list.info=
-cmd.accept.info=
+cmd.kick.info=Kick member out of team ( captain only)!
+cmd.list.info=Show team members!
+cmd.accept.info=Accept team invite
+cmd.info.info=Show team's info
 
 # command error message
 cmd.create.error.alreadyexists=That team already exists
 cmd.create.error.haveteam=You're already in a team! Leave it first!
 cmd.create.error.toolong=That team name is too long!
 
-
+cmd.invite.error.sameplayer=You can't invite yourself!
+cmd.invite.error.offline=is offline!
+cmd.invite.error.noteam=You need create team first!
+cmd.invite.error.alreadyinvite=You're already invited
+cmd.invite.error.haveteam=Player is already have team!
+cmd.invite.error.limit=Team reached the upper limit!
 
 cmd.leave.error.noargs=too many arguements! 
 cmd.leave.error.noteam=You don't have team!
 
+
+cmd.accept.error.sameplayer=You can't accept yourself!
+cmd.accept.error.haveteam=You are already have team!
+cmd.accept.error.offline=is offline!
+cmd.accept.error.noteam=Invalid invite!
+cmd.accept.error.noinvite= You don't have invited from this player!
+
+cmd.reject.error.sameplayer=You can't reject yourself!
+cmd.reject.error.noteam=This tean was disband!
+cmd.reject.error.noinvite=This invite is invalid!
+
+ 
+
+cmd.kick.error.offline=is offline!
+cmd.kick.error.sameplayer=You can't kick yourself!
+cmd.kick.error.noteam=You need create team first!
+cmd.kick.error.notowner=You don't have permission!
+cmd.kick.error.notmember=This player is not team member;
+
+cmd.list.error.noteam=You need have team first!!
+
+
 # command success message
 cmd.create.success.create=You created team :
 cmd.leave.success.leave=Success leave team
+cmd.leave.success.ownerleave=Owner leave team, team is disband!
+cmd.leave.success.alreadyleave=leave team!
+cmd.invite.success.invite=Send invite to player
+cmd.accept.success.accept=Enter team
+cmd.accept.success.intoteam=You are enter team
+cmd.kick.success.forteam=Captain already kick player 
+cmd.kick.success.forplayer=You are kicked out of the team
+cmd.reject.success.forsender=reject your invite!
+cmd.reject.success.forplayer=You reject team invite!
+
+# command normal message
+cmd.invite.receive=Receive invite from player 
+cmd.msg.teamname=Team Name
+cmd.msg.captain=Captain
+cmd.msg.membercount=Member count
+cmd.msg.member=Members
+cmd.msg.accept=Accept
+cmd.msg.reject=Reject

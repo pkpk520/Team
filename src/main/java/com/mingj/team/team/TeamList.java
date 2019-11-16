@@ -69,10 +69,16 @@ public class TeamList extends WorldSavedData{
 	}
 	
 	public void leave( UUID uuid ){
-		Team team = this.getTeamByUUID( uuid );
-		teamList.remove( team.getName() );
 		playerTeam.remove( uuid );
-		team.delete();
-		team = null;
+	}
+	
+	public void disband( String teamname ){
+		this.getTeamByName( teamname ).delete();
+		teamList.remove( teamname );
+	}
+	public void join(UUID uuid ,Team team ){
+		team.add( uuid );
+		team.removeInvite( uuid );
+		this.playerTeam.put( uuid, team);
 	}
 }

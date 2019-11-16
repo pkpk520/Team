@@ -19,13 +19,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import scala.actors.threadpool.Arrays;
 
-public class AcceptCommand extends SubCommand{
-	public static final String NAME = "accept";
-	public AcceptCommand() {
+public class RejectCommand extends SubCommand{
+	public static final String NAME = "reject";
+	public RejectCommand() {
 		super(NAME);
 	}
 	@Override
-	public boolean execute(MinecraftServer server, ICommandSender sender, String[] args) {
+	public boolean execute(MinecraftServer server, ICommandSender sender, String[] args){
 		if( args.length != 2){
 			return false;
 		}
@@ -33,7 +33,7 @@ public class AcceptCommand extends SubCommand{
 		String[] names = server.getOnlinePlayerNames();
 		List<String> namelist = Arrays.asList( names );
 		if( !namelist.contains( args[1]) ){
-			sender.sendMessage(new TextComponentString(TextFormatting.RED +args[1]+" "+I18n.translateToLocal( "cmd.accept.error.offline" )));
+			sender.sendMessage(new TextComponentString(TextFormatting.RED +args[1]+" "+I18n.translateToLocal( "cmd.reject.error.offline" )));
 			return true;
 		}
 		UUID recvuuid;
@@ -49,27 +49,24 @@ public class AcceptCommand extends SubCommand{
 		UUID senduuid = player.getUniqueID();
 		
 		if( senduuid == recvuuid ){
-			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.accept.error.sameplayer" )));
+			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.reject.error.sameplayer" )));
 			return true;
 		}
 		TeamList teams = TeamMod.getTeams();
-		if( teams.getTeamByUUID( senduuid ) != null){
-			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.accept.error.haveteam" )));
-			return true;
-		}
+	
 		Team team = teams.getTeamByUUID( recvuuid );
 		if( team == null){
-			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.accept.error.noteam" )));
+			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.reject.error.noteam" )));
 			return true;
 		}
 		if( !team.hasInvite( recvuuid, senduuid) ){
-			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.accept.error.noinvite" )));
+			sender.sendMessage(new TextComponentString(TextFormatting.RED +I18n.translateToLocal( "cmd.reject.error.noinvite" )));
 			return true;
 		}
-		teams.join(senduuid, team);
-		String msg =  TextFormatting.DARK_AQUA + player.getName()+" "+I18n.translateToLocal( "cmd.accept.success.accept" );
-		team.announceExcept( msg,senduuid);
-		sender.sendMessage(new TextComponentString(TextFormatting.DARK_AQUA +I18n.translateToLocal( "cmd.accept.success.intoteam" )+" "+team.getName()));
+		team.removeInvite( senduuid );
+		String msg =  TextFormatting.RED + player.getName()+" "+I18n.translateToLocal( "cmd.reject.success.forsender" );
+		reciver.sendMessage( new TextComponentString(msg) );
+		player.sendMessage( new TextComponentString(I18n.translateToLocal( "cmd.reject.success.forplayer" )));
 		return true;
 	}
 	@Override
@@ -77,5 +74,5 @@ public class AcceptCommand extends SubCommand{
 		return "<player_name>";
 	}
 	
-	
+
 }

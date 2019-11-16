@@ -2,7 +2,9 @@ package com.mingj.team.api.command;
 
 
 
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.translation.I18n;
 
