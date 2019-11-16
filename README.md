@@ -15,4 +15,6 @@ Minecraft 組隊模組 ( Team Mod for minecraft )
 /team accept <player>: 接受玩家發送的組隊邀請  
 /team list : 列出隊員清單  
 /team kick <player> : 從組隊剔除玩家  
+/team info : 列出隊伍設定
+/team set <attribute> <value> : 設置隊伍設定
 
